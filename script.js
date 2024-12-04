@@ -13,13 +13,18 @@ squares.forEach(function(square){
             if(checkwin()){
                 game=false;
 
-                turn.textContent=`${player}Wins!`
-            } 
+                turn.textContent=`${player}Wins!`;
+            } else if (draw()){
+                game=false;
+                turn.textContent= "draw!";
+            } else{
+                switch();
+            }
 
         }
-    })
+    });
 
-})
+});
 
 function checkwin(){
     const wincombos = [
@@ -44,4 +49,9 @@ function draw(){
         return square.textContent;
 
     });
+}
+
+function switch() {
+    player = player === 'X' ? 'O' : 'X';
+    turn.textContent = player;
 }
