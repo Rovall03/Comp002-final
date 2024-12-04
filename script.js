@@ -23,6 +23,7 @@ squares.forEach(function(square){
             square.textContent=player;
             if(checkWin()){
                 game=false;
+                newScore(player);
                 turn.textContent=`${player} Wins!`;
             } else if (draw()){
                 game=false;
@@ -77,12 +78,12 @@ function switchPlayer() {
 function newScore(players){
     if (players==='x'){
         scoreX++;
-        localStorage.setItem('Score X',scoreX);
+        localStorage.setItem('scoreX',scoreX);
         scoreboardX.textContent=scoreX;
     }
     else{
         scoreO++;
-        location.setItem('Score O',scoreO);
+        localStorage.setItem('scoreO',scoreO);
         scoreboardO.textContent=scoreO;
     }
-};
+}
