@@ -8,22 +8,30 @@ turn.textContent=player;
 
 squares.forEach(function(square){
     square.addEventListener('click',function(){
-        if(!square.textContent & game){
+        if(!square.textContent && game){
             square.textContent=player;
             if(checkwin()){
                 game=false;
-
                 turn.textContent=`${player}Wins!`;
             } else if (draw()){
                 game=false;
                 turn.textContent= "draw!";
             } else{
-                switch();
+                switchplayer();
             }
 
         }
     });
 
+});
+
+button.addEventListener ('click',function(){
+    squares.forEach(function(square){
+        square.textContent='';
+    });
+ game=true;
+ player= 'x';
+ turn.textContent=player;
 });
 
 function checkwin(){
@@ -45,13 +53,12 @@ function checkwin(){
 }
 
 function draw(){
-    return Array.from(squares).every(function(square){
+    return Array.from(squares).every(function(square) {
         return square.textContent;
-
     });
 }
 
-function switch() {
-    player = player === 'X' ? 'O' : 'X';
+function switchplayer() {
+    player = player === 'x' ? 'o' : 'x';
     turn.textContent = player;
 }
