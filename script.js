@@ -3,21 +3,32 @@ let game= true;
 let squares = document.querySelectorAll('.game-square');
 let button= document.getElementById('button-play-again');
 let turn= document.getElementById('turn');
+let scoreboardX =document.getElementById('scoreboard-x');
+let  scoreboardO =document.getElementById('scoreboard-o');
+
+let scoreX= parseInt(localStorage.getItem('scoreX')) || 0;
+let scoreO= parseInt(localStorage.getItem('scoreO')) || 0;
+
+
 
 turn.textContent=player;
+scoreboardX.textContent=scoreX;
+scoreboardO.textContent=scoreO;
+
+
 
 squares.forEach(function(square){
     square.addEventListener('click',function(){
         if(!square.textContent && game){
             square.textContent=player;
-            if(checkwin()){
+            if(checkWin()){
                 game=false;
-                turn.textContent=`${player}Wins!`;
+                turn.textContent=`${player} Wins!`;
             } else if (draw()){
                 game=false;
                 turn.textContent= "draw!";
             } else{
-                switchplayer();
+                switchPlayer();
             }
 
         }
@@ -34,8 +45,8 @@ button.addEventListener ('click',function(){
  turn.textContent=player;
 });
 
-function checkwin(){
-    const wincombos = [
+function checkWin(){
+    const winCombos = [
         [0,1,2],
         [3,4,5],
         [6,7,8],
@@ -45,7 +56,7 @@ function checkwin(){
         [2,4,6],
         [0,4,8],
     ];
-    return wincombos.some(function(combo){
+    return winCombos.some(function(combo){
         return combo.every(function(index){
             return squares [index].textContent == player;
         });
@@ -58,7 +69,20 @@ function draw(){
     });
 }
 
-function switchplayer() {
+function switchPlayer() {
     player = player === 'x' ? 'o' : 'x';
     turn.textContent = player;
 }
+
+function newScore(players){
+    if (players==='x'){
+        scoreX++;
+        localStorage.setItem('Score X',scoreX);
+        scoreboardX.textContent=scoreX;
+    }
+    else{
+        scoreO++;
+        location.setItem('Score O',scoreO);
+        scoreboardO.textContent=scoreO;
+    }
+};
