@@ -14,7 +14,7 @@ squares.forEach(function(square){
                 game=false;
 
                 turn.textContent=`${player}Wins!`
-            }
+            } 
 
         }
     })
@@ -36,5 +36,12 @@ function checkwin(){
         return combo.every(function(index){
             return squares [index].textContent == player;
         });
+    });
+}
+
+function draw(){
+    return Array.from(squares).every(function(square){
+        return square.textContent;
+
     });
 }
